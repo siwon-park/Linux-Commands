@@ -33,7 +33,7 @@ class Comment(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     # 댓글이 달린 게시글
-    commented_article= models.ForeignKey(Article, on_delete=models.CASCADE, related_name='article_comment')
+    commented_article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='article_comment')
 
     # 댓글 작성자(역참조: "write_comment")
     write_comment_user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="write_comment")
