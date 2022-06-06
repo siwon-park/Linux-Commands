@@ -20,7 +20,7 @@ class Article(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    # 게시글을 작성한 사용자 참조(역참조: "write_article")
+    # 게시글을 작성한 사용자(역참조: "write_article")
     write_article_user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='write_article')
 
     # 게시글을 좋아요한 사용자들(역참조: "like_articles")
