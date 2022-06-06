@@ -33,8 +33,22 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     # local
     'accounts',
+    'articles',
+    'skills',
 
     # third-party
+    'django_extensions',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'corsheaders',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.kakao',
+    'dj_rest_auth',
+    'dj_rest_auth.registration',
 
     # django-default
     'django.contrib.admin',
@@ -43,11 +57,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -130,6 +148,22 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+AUTH_USER_MODEL = 'accounts.User'
+
+CORS_ALLOW_ALL_ORIGINS = True
+
+REST_FRAMEWORK = {
+    # 기본 인증 방식 설정(Basic TokenAuthentication)
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+
+    # 기본 권한 설정
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated', # 인증받은 자에게 권한 허용
+        # 'rest_framework.permissions.AllowAny', # 모두에게 권한 허용
+    ]
+}
 
 # secret key 호출
 secret_file = os.path.join(BASE_DIR, 'secrets.json') #secrets.json을 불러옴
