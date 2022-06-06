@@ -1,4 +1,3 @@
-from unicodedata import category
 from django.db import models
 from django.conf import settings
 
@@ -12,6 +11,7 @@ class Skill(models.Model):
     difficulty = models.CharField(max_length=20) # basic, advanced, etc ...
     logo_img = models.CharField(max_length=200, null=True, blank=True)
     level = models.IntegerField(null=True, blank=True) # 학습 난이도
+    skill_type = models.ForeignKey(Type, on_delete=models.CASCADE, related_name='type_skill')
 
     # 선행/후행 재귀 관계
     need_skills = models.ManyToManyField('self', symmetrical=False, related_name='super_skills', blank=True)
