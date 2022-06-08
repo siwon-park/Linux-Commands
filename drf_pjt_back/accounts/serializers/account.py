@@ -4,21 +4,49 @@ from skills.models import Knowledge, Skill
 
 User = get_user_model()
 
+class AccountSerializer(serializers.ModelSerializer):
+    
+    profile_img = serializers.CharField(max_length=300)
+    school = serializers.CharField(max_length=30) # 학력 및 학교
+    career = serializers.TextField() # 커리어 경험
+    introduce = serializers.TextField() # 자기 소개
+    github_url = serializers.CharField(max_length=200)
+    blog_url = serializers.CharField(max_length=200)
+    notion_url = serializers.CharField(max_length=200)
+
+    class Meta:
+        model = User
+        fields = ('profile_img', 'school', 'career', 'introduce', 'github_url', 'blog_url', 'notion_url',)
+
+    def get_cleaned_data(self):
+        data = super().get_cleaned_data()
+        data['profile_img'] = self.validated_data.get('profile_img', '')
+        data['school'] = self.validated_data.get('school', '')
+        data['career'] = self.validated_data.get('career', '')
+        data['introduce'] = self.validated_data.get('introduce', '')
+        data['github_url'] = self.validated_data.get('github_url', '')
+        data['blog_url'] = self.validated_data.get('blog_url', '')
+        data['notion_url'] = self.validated_data.get('notion_url', '')
+
+        return data
+
+
 class SkillSerializer(serializers.ModelSerializer):
         class Meta:
             model = Skill
             fields = '__all__'
+
 
 class UserSeializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = '__all__'
 
+
 class KnowledgeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Knowledge
         fields = '__all__'
-
 
 
 # 프로필 조회 및 수정, 개발 동료 조회

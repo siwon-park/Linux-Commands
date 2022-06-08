@@ -1,8 +1,6 @@
-from dataclasses import fields
-from pyexpat import model
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
-from accounts.serializers.account2 import SkillSerializer
+from accounts.serializers.account import SkillSerializer
 from skills.models import Knowledge, Skill
 
 # 로드맵 조회 및 상세 조회
