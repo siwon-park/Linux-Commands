@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 
+app_name = 'articles'
 urlpatterns = [
     # 전체 게시글 조회 및 단일 게시글 생성
     path('', views.article_list_or_create),
