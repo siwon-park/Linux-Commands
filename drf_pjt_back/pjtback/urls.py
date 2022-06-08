@@ -18,10 +18,10 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/', include('accounts.urls')),
-    path('accounts/', include('allauth.urls')), # 소셜 로그인
-    path('articles/', include('articles.ulrs')), 
-    path('skills/', include('skills.urls')),
+    # path('accounts/', include('accounts.urls')),
+    # path('accounts/', include('allauth.urls')), # 소셜 로그인
+    path('articles/', include('articles.urls')), 
+    # path('skills/', include('skills.urls')),
     # dj-rest_auth
     path('account/', include('dj_rest_auth.urls')),
     path('account/signup/', include('dj_rest_auth.registration.urls')),
