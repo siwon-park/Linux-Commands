@@ -1,3 +1,4 @@
+from dataclasses import field
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from skills.models import Knowledge, Skill
@@ -8,8 +9,8 @@ class AccountSerializer(serializers.ModelSerializer):
     
     profile_img = serializers.CharField(max_length=300)
     school = serializers.CharField(max_length=30) # 학력 및 학교
-    career = serializers.TextField() # 커리어 경험
-    introduce = serializers.TextField() # 자기 소개
+    career = serializers.CharField(max_length=200) # 커리어 경험
+    introduce = serializers.CharField(max_length=200) # 자기 소개
     github_url = serializers.CharField(max_length=200)
     blog_url = serializers.CharField(max_length=200)
     notion_url = serializers.CharField(max_length=200)
@@ -49,32 +50,43 @@ class KnowledgeSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-# 프로필 조회 및 수정, 개발 동료 조회
+# 프로필 조회, 수정, 사용자 로드맵 조회, 개발 동료 조회
 class ProfileSerializer(serializers.ModelSerializer):
     
     class UserSkillSerializer(serializers.ModelSerializer):
         
+        knowledge_skill = SkillSerializer(read_only=True)
+        
         class Meta:
             model = Knowledge
-            fields = ('id', 'level',)
+            fields = '__all__'
             
     user_knowledge = UserSkillSerializer(many=True, read_only=True)
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'user_knowledge')
+        fields = ('id', 'username', 'email', 'profile_img', 'school', 'career', 'introduce', 'github_url', 'blog_url', 'notion_url', 'bookmarking', 'user_knowledge', )
+
 
 # 회원 탈퇴
 
-# 사용자 로드맵 조회 및 수정, 로드맵 선택
-class UserRoadmap(serializers.ModelSerializer):
-
-    knowledge_skill = SkillSerializer(read_only=True)
-    knowledge_user = UserSeializer(read_only=True)
+# 사용자 로드맵 수정, 로드맵 선택
+class ProfileRoadmapSerializer(serializers.ModelSerializer):
+    
+    class UserSkillSerializer(serializers.ModelSerializer):
+        
+        knowledge_skill = SkillSerializer(read_only=True)
+        
+        class Meta:
+            model = Knowledge
+            fields = '__all__'
+            
+    user_knowledge = UserSkillSerializer(many=True, read_only=True)
 
     class Meta:
-        model = Knowledge
-        fields = '__all__'
+        model = User
+        fields = ('id', 'user_knowledge', )
+
 
 # 사용자 로드맵 상세 조회
 class UserRoadmapDetailSerializer(serializers.ModelSerializer):

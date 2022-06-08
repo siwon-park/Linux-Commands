@@ -71,7 +71,7 @@
 
 ### 🏗 데이터베이스 모델링(ERD)
 
-![image-20220606151016405](images/README/image-20220606151016405.png)
+![image-20220608162017515](images/README/image-20220608162017515.png)
 
 
 
@@ -127,13 +127,13 @@
 
 ### 🔥이슈 관리
 
-| No.  | Name   | Content                                                      | Solve    | follow-up                                                    |
-| ---- | ------ | ------------------------------------------------------------ | -------- | ------------------------------------------------------------ |
-| 1    | 박시원 | 게시글 Detail 페이지 문제 발생<br />1. 게시글 상세 페이지에서 좋아요 누를 시 화면이 갱신이 되지 않는 문제 발생<br />2. 게시글 상세 페이지 댓글 작성 시 바로 갱신 되지 않는 문제 발생<br />3. 게시글 상세 페이지 댓글 삭제 시 바로 갱신 되지 않는 문제 발생<br />⇒ 원인은 review와 comment를 computed 속성으로 받아와서 그런 듯함 | 해결완료 |                                                              |
-| 2.   | 이현정 | serializer<br />1. AssertionError: The field 'vote_answer_count' was declared on serializer VoteSerializer, but has not been included in the 'fields' option. => serilaizer에서 정의된 필드가 사용되지 않은 것<br />2. AssertionError: Expected a `Response`, `HttpResponse` or `HttpStreamingResponse` to be returned from the view, but received a `<class 'NoneType'>` => url에 엔드 슬래시 누락 | 해결완료 |                                                              |
-| 3.   | 박시원 | 1. 대댓글 수정 버튼을 누를 시 기존 입력된 데이터를 받아오는 문제⇒ props속성의 데이터이기 때문에 v-model로는 해결 불가 | 해결완료 | 대댓글 생성 후 정상 출력 구현 ⇒ 자기 자신의 id를 자식에게 넘겨줘야하는데 부모의 id를 넘겨주고 있었음 |
-| 4.   | 박시원 | 1. 댓글 작성을 완료해도 입력 데이터가 사라지지 않음<br />2. 대댓글 삭제를 해도 살아있는 현상 발생<br />3. 대댓글 작성/수정/삭제 권한이 모두에게 보이는 현상 발생 | 해결완료 |                                                              |
-| 5.   | 박시원 | 데이터를 가져오고 저장하는 비동기 로직에 대한 이해가 부족, 뷰 라이프 사이클 훅 등 | 미흡     | 추가적인 학습 필요                                           |
+| No.  | Name   | Content                                                      | Solve    | follow-up |
+| ---- | ------ | ------------------------------------------------------------ | -------- | --------- |
+| 1    | 이현정 | serializer<br />1. AssertionError: The field 'vote_answer_count' was declared on serializer VoteSerializer, but has not been included in the 'fields' option. => serilaizer에서 정의된 필드가 사용되지 않은 것<br />2. AssertionError: Expected a `Response`, `HttpResponse` or `HttpStreamingResponse` to be returned from the view, but received a `<class 'NoneType'>` => url에 엔드 슬래시 누락 | 해결완료 |           |
+| 2.   |        |                                                              |          |           |
+|      |        |                                                              |          |           |
+|      |        |                                                              |          |           |
+|      |        |                                                              |          |           |
 
 
 
