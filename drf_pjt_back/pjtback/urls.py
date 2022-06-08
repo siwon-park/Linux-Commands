@@ -25,5 +25,4 @@ urlpatterns = [
     # dj-rest_auth
     path('account/', include('dj_rest_auth.urls')),
     path('account/signup/', include('dj_rest_auth.registration.urls')),
-
 ]

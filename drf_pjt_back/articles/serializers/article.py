@@ -1,7 +1,7 @@
 from articles.models import Article, Comment
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
-
+from .comment import CommentListSerializer
 User = get_user_model()
 
 # 전체 게시글 조회 및 단일 게시글 생성
@@ -22,7 +22,7 @@ class ArticleListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Article
-        fields = ('id', 'catergory', 'title', 'content', 'created_at', 'updated_at', 'write_article_user', 'comment_count', 'like_count')
+        fields = ('id', 'catergory', 'title', 'content', 'created_at', 'updated_at', 'write_article_user', 'comment_count', 'like_count',)
 
 
 # 단일 게시글 조회/수정/삭제
@@ -40,6 +40,8 @@ class ArticleSerializer(serializers.ModelSerializer):
     # 게시글의 좋아요 수
     like_count = serializers.IntegerField(source='like_article_users.count', read_only=True)
 
+    article_comment = CommentListSerializer(many=True, read_only=True)
+
     class Meta:
         model = Article
-        fields = ('id', 'catergory', 'title', 'content', 'created_at', 'updated_at', 'write_article_user', 'comment_count', 'like_count')
+        fields = ('id', 'catergory', 'title', 'content', 'created_at', 'updated_at', 'write_article_user', 'comment_count', 'like_count', 'article_comment',)
