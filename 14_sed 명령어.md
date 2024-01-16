@@ -72,4 +72,6 @@ sed -i '$a추가할내용' test.txt
 sed -e 's/탭/스페이스/g' test.txt
 # ※ 탭: \t, 스페이스: (공백 1번)
 
+# 파일 내용의 모든 줄마다 특정 문자(abc)를 추가 후 저장
+sed -i 's/$/abc/' test.txt
 ```
